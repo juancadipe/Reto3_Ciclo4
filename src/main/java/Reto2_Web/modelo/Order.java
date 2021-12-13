@@ -18,13 +18,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 
 @Document(collection = "orders")
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-    
-    
     public static String PENDING = "Pendiente";
     public static String APROVED = "Aprobada";
     public static String REJECTED = "Rechazada";
@@ -34,7 +31,7 @@ public class Order {
     private Date registerDay;
     private String status;
     private User salesMan;
-    private Map<Integer, Supplements> products;
-    private Map<Integer, Integer> quantities;
+    private Map<String, Supplements> products;
+    private Map<String, Integer> quantities;
     
 }

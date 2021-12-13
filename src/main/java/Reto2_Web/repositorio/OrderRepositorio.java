@@ -17,11 +17,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class OrderRepositorio {
-        @Autowired
+    
+    @Autowired
     private InterfaceOrder orderCrudRepository;
 
     public List<Order> getAll(){
-        return orderCrudRepository.findAll();
+        return (List<Order>) orderCrudRepository.findAll();
     }
 
     public Optional<Order> getOrder(Integer id){
@@ -40,8 +41,12 @@ public class OrderRepositorio {
         orderCrudRepository.delete(order);
     }
 
-    public List<Order> getOrderByZone(String zone){
-        return orderCrudRepository.findBySalesManZone(zone);
+    public Optional<Order> lastUserId(){
+        return orderCrudRepository.findTopByOrderByIdDesc();
+    }    
+    
+    public List<Order> findByZone (String zone){
+        return orderCrudRepository.findByZone(zone);//ojo ultima modificacion no se si esto es asi 
     }
     
 }

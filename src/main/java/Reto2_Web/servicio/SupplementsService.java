@@ -9,6 +9,7 @@ import Reto2_Web.repositorio.SupplementsRepositorio;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,8 +18,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SupplementsService {
+    
      @Autowired
     private SupplementsRepositorio clotheRepository;
+     
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     public List<Supplements> getAll() {
         return clotheRepository.getAll();
@@ -48,6 +53,10 @@ public class SupplementsService {
                 
                 if (accesory.getCategory() != null) {
                     accesoryDb.get().setCategory(accesory.getCategory());
+                }
+                
+                if (accesory.getCategory() != null) {
+                    accesoryDb.get().setObjetivo(accesory.getObjetivo());
                 }
                 
                 if (accesory.getDescription() != null) {

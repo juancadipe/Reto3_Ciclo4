@@ -18,55 +18,51 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
-       @Autowired
+
+    @Autowired
     private OrderRepositorio orderRepository;
 
-    public List<Order> getAll(){
+    public List<Order> getAll() {
         return orderRepository.getAll();
     }
 
-    public Optional<Order> getOrder(Integer id){
+    public Optional<Order> getOrder(int id) {
         return orderRepository.getOrder(id);
     }
 
-    public Order create(Order order){
-        if (order.getId() == null){
-            return order;
-        } else {
-            return orderRepository.create(order);
+    public Order create(Order order) {
+        
+        //obtiene el maximo id existente en la coleccion
+        Optional<Order> orderIdMaxima = orderRepository.lastUserId();
+        
+        //si el id de la orden que se recibe como parametro es nulo, entonces valida el maximo id existente en base de datos
+        if (order.getId() == null) {
+            //valida el maximo id generado, si no hay ninguno aun el primer id sera 1
+            if (orderIdMaxima.isEmpty())
+                order.setId(1);
+            //si retorna informacion suma 1 al maximo id existente y lo asigna como el codigo de la orden
+            else
+                order.setId(orderIdMaxima.get().getId() + 1);
         }
+        
+        Optional<Order> e = orderRepository.getOrder(order.getId());
+        if (e.isEmpty()) {
+            return orderRepository.create(order);            
+        }else{
+            return order;
+        }        
     }
 
-    public Order update(Order order){
-        if (order.getId() != null){
-            Optional<Order> dbOrder = orderRepository.getOrder(order.getId());
-            if (!dbOrder.isEmpty()) {
+    public Order update(Order order) {
 
-                if (order.getId() != null) {
-                    dbOrder.get().setId(order.getId());
-                }
-
-                if (order.getRegisterDay() != null) {
-                    dbOrder.get().setRegisterDay(order.getRegisterDay());
-                }
-
+        if (order.getId() != null) {
+            Optional<Order> orderDb = orderRepository.getOrder(order.getId());
+            if (!orderDb.isEmpty()) {
                 if (order.getStatus() != null) {
-                    dbOrder.get().setStatus(order.getStatus());
+                    orderDb.get().setStatus(order.getStatus());
                 }
-
-                if (order.getSalesMan() != null) {
-                    dbOrder.get().setSalesMan(order.getSalesMan());
-                }
-
-                if (order.getProducts() != null) {
-                    dbOrder.get().setProducts(order.getProducts());
-                }
-
-                if (order.getQuantities() != null) {
-                    dbOrder.get().setQuantities(order.getQuantities());
-                }
-                orderRepository.update(dbOrder.get());
-                return dbOrder.get();
+                orderRepository.update(orderDb.get());
+                return orderDb.get();
             } else {
                 return order;
             }
@@ -75,15 +71,25 @@ public class OrderService {
         }
     }
 
-    public boolean delete(Integer id){
-        return getOrder(id).map(order -> {
+    public boolean delete(int id) {
+        Boolean aBoolean = getOrder(id).map(order -> {
             orderRepository.delete(order);
             return true;
         }).orElse(false);
+        return aBoolean;
     }
 
-    public List<Order> getOrderByZone(String zone){
-        return orderRepository.getOrderByZone(zone);
+    //Ordenes de pedido asociadas a los asesores de una zona
+    public List<Order> findByZone(String zona) {
+        return orderRepository.findByZone(zona);
     }
+//
+//    public List<Order> ordersSalesManByDate(String dateStr, int id) {
+//        return orderRepository.ordersSalesManByDate(dateStr, id);
+//    }
+//    
+//    public List<Order> ordersSalesManByState(String state, Integer id) {
+//        return orderRepository.ordersSalesManByState(state, id);
+//    }
     
 }

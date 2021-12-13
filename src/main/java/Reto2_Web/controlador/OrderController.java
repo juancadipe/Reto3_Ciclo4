@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author Usuario
+ * @author Juan Carlos Diaz Peña 
  */
 @RestController
 @RequestMapping("/api/order")
@@ -61,8 +61,8 @@ public class OrderController {
     }
 
     @GetMapping("/zona/{zone}")
-    public  List<Order> getOrdersByZone(@PathVariable("zone") String zone){
-        return orderService.getOrderByZone(zone);
+    public  List<Order> findByZone(@PathVariable("zone") String zone){
+        return orderService.findByZone(zone);
     }    
     
 }

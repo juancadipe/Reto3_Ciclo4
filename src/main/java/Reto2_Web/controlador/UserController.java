@@ -59,8 +59,9 @@ public class UserController {
         return userService.getUser(id);
     }
 
-      @PostMapping("/new")
+    @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
+      
       /**
        * Metodo user create
        */

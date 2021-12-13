@@ -16,5 +16,7 @@ public interface InterfaceUser extends MongoRepository<User, Integer> {
     Optional<User> findByEmail(String email);
     Optional<User> findByEmailAndPassword(String email,String password);
     //Seleciona el usuario con el maximo Id o el ultimo id el mayor
-    Optional<User> findToByOrderByIdDesc();
+     Optional<User> findTopByOrderByIdDesc();
+
+
 }

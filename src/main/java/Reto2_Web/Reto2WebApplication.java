@@ -6,6 +6,7 @@
 
 
 package Reto2_Web;
+import Reto2_Web.interfaces.InterfaceOrder;
 import Reto2_Web.interfaces.InterfaceUser;
 import Reto2_Web.interfaces.InterfaceSupplements;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,12 @@ import org.springframework.stereotype.Component;
 public class Reto2WebApplication implements CommandLineRunner {
    @Autowired
     private InterfaceSupplements interfaceSupplements;
-    @Autowired
+   @Autowired
     private InterfaceUser interfaceUser;
+   @Autowired
+    private InterfaceOrder interfaceOrder;
+   
+   
 	public static void main(String[] args) {
 		SpringApplication.run(Reto2WebApplication.class, args);
 	}
@@ -28,6 +33,7 @@ public class Reto2WebApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         interfaceSupplements.deleteAll();
         interfaceUser.deleteAll();
+        interfaceOrder.deleteAll();
     }
         
 
