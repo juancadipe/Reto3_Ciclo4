@@ -6,6 +6,7 @@ package Reto2_Web.controlador;
 import Reto2_Web.servicio.UserService;
 import Reto2_Web.modelo.User;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Juan Carlos Diaz Peña
  */
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/user/")
 @CrossOrigin("*")
 /**
  * Clase user controler
@@ -45,6 +46,19 @@ public class UserController {
     public List<User> getAll() {
         return userService.getAll();
     }
+    /**
+     * Metodo get mapin para consultar con referencia al id
+     * @param id corresponde al id del producto
+     * @return 
+     */
+    @GetMapping("/{id}")
+    /**
+     * metodo para consultar por el id
+     */
+    public Optional<User> getUser(@PathVariable("id") Integer id) {
+        return userService.getUser(id);
+    }
+
       @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
       /**
