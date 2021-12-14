@@ -45,8 +45,8 @@ public class OrderRepositorio {
         return orderCrudRepository.findTopByOrderByIdDesc();
     }    
     
-    public List<Order> findByZone (String zone){
-        return orderCrudRepository.findByZone(zone);//ojo ultima modificacion no se si esto es asi 
+    public List<Order> getOrderByZone(String zone){
+        return orderCrudRepository.findBySalesManZone(zone);
     }
     
 }
