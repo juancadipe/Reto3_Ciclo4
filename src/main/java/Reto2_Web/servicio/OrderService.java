@@ -4,10 +4,13 @@
  */
 package Reto2_Web.servicio;
 
+import Reto2_Web.controlador.OrderController;
 import Reto2_Web.modelo.Order;
 import Reto2_Web.repositorio.OrderRepositorio;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
+    
+    Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     private OrderRepositorio orderRepository;
@@ -81,6 +86,7 @@ public class OrderService {
 
     //Ordenes de pedido asociadas a los asesores de una zona
     public List<Order> findByZone(String zona) {
+        logger.info("787878787878 Aqui pasaron 2 Service" + zona);
         return orderRepository.findByZone(zona);
     }
 //

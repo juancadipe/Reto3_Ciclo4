@@ -8,6 +8,8 @@ import Reto2_Web.modelo.Order;
 import Reto2_Web.servicio.OrderService;
 import java.util.List;
 import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,6 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/order")
 @CrossOrigin("*")
 public class OrderController {
+    
+    Logger logger = LoggerFactory.getLogger(OrderController.class);
 
     @Autowired
     private OrderService orderService;
@@ -64,7 +68,13 @@ public class OrderController {
     //Reto 3:Ordenes de pedido asociadas a los asesores de una zona
     @GetMapping("/zona/{zona}")
     public List<Order> findByZone(@PathVariable("zona") String zona) {
-        return orderService.findByZone(zona);
+        try {
+        logger.info("787878787878 Aqui pasaron" + zona);
+        return orderService.findByZone(zona);            
+        } catch(Exception e) {
+            logger.info("Hubo error 787878787878" + e.getMessage());
+            throw e;
+        }
     }
 }
 
