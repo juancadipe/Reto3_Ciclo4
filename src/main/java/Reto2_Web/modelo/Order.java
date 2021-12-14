@@ -31,7 +31,7 @@ public class Order {
     private Date registerDay;
     private String status;
     private User salesMan;
-    private Map<String, Supplements> products;
-    private Map<String, Integer> quantities;
+    private Map<Integer, Supplements> products;
+    private Map<Integer, Integer> quantities;
     
 }

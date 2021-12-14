@@ -60,9 +60,10 @@ public class OrderController {
         return orderService.delete(id);
     }
 
-    @GetMapping("/zona/{zone}")
-    public  List<Order> findByZone(@PathVariable("zone") String zone){
-        return orderService.findByZone(zone);
+    //Reto 3:Ordenes de pedido asociadas a los asesores de una zona
+    @GetMapping("/zona/{zona}")
+    public List<Order> findByZone(@PathVariable("zona") String zona) {
+        return orderService.findByZone(zona);
     }    
     
 }
