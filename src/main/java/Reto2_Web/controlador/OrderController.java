@@ -62,9 +62,9 @@ public class OrderController {
     }
     
     //Reto 3:Ordenes de pedido asociadas a los asesores de una zona
-     @GetMapping("/zona/{zone}")
-    public  List<Order> getOrdersByZone(@PathVariable("zone") String zone){
-        return orderService.getOrderByZone(zone);
+    @GetMapping("/zona/{zona}")
+    public List<Order> findByZone(@PathVariable("zona") String zona) {
+        return orderService.findByZone(zona);
     }
 }
 

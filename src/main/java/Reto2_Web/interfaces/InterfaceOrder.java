@@ -22,8 +22,8 @@ public interface InterfaceOrder extends MongoRepository< Order, Integer> {
      * @param zone
      * @return 
      */
-    @Query("{'salesMan.zone': ?0]")
-        List<Order> findBySalesManZone(final String zone);
+    @Query("{'salesMan.zone': ?0}")
+    List<Order> findByZone(final String zone);
     /**
      * Retorna las ordenes por el estado
      * @param status
