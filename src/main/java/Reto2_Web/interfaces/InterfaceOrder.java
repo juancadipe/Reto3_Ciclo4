@@ -19,7 +19,7 @@ import org.springframework.data.mongodb.repository.Query;
 public interface InterfaceOrder extends MongoRepository< Order, Integer> {
     /**
      * Retorna las ordenes de pedido de la zona recibida como parametro
-     * @param country
+     * @param zone
      * @return 
      */
     @Query("{'salesMan.zone': ?0]")
